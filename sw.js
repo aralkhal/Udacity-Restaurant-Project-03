@@ -1,42 +1,48 @@
 
-self.addEventListener('install', function(event) {
-    // Perform install steps
-
-    var CACHE_NAME = 'my-site-cache-v1';
-    var urlsToCache = [
-        '/',
-        'css/styles.css',
-        'js/main.js',
-        'img/1.jpg'
-    ];
-
     self.addEventListener('install', function(event) {
     // Perform install steps
     event.waitUntil(
-        caches.open(CACHE_NAME)
+        caches.open('Abdullah-Restaurant-App-Cache-v1')
         .then(function(cache) {
             console.log('Opened cache');
-            return cache.addAll(urlsToCache);
+            return cache.addAll([
+              '/',
+              'css/styles.css',
+              'js/main.js', 
+              'img/1.jpg',
+              'img/2.jpg',
+              'img/3.jpg',
+              'img/4.jpg',
+              'img/5.jpg',
+              'img/6.jpg',
+              'img/7.jpg',
+              'img/8.jpg',
+              'img/9.jpg',
+              'img/10.jpg',
+              
+
+            ]);
         })
     );
     });
 
 
 
-  });
+  // });
 
 
-  self.addEventListener('activate', function(event) {
-    event.waitUntil(
-      // TODO: remove the old cache
-      // caches.delete('wittr-static-v1').then(function(cache){
+  // self.addEventListener('activate', function(event) {
+  //   event.waitUntil(
+  //     // TODO: remove the old cache
+  //     // caches.delete('wittr-static-v1').then(function(cache){
   
-      // })
-      console.log('hello')
-    );
-  });
+  //     // })
+  //     console.log('hello')
+  //   );
+  // });
   
   self.addEventListener('fetch', function(event) {
+    console.log('inside the fetch');
     event.respondWith(
       caches.match(event.request).then(function(response) {
         return response || fetch(event.request);
